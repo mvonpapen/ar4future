@@ -1,7 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.Video;
 using Vuforia;
 public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
 {
+    // from howto ar video
+    public ImageTargetBehaviour behaviour;
+    CloudRecoBehaviour cloud;
+    public GameObject mainPlayer;
+
     private CloudRecoBehaviour mCloudRecoBehaviour;
     private bool mIsScanning = false;
     private string mTargetMetadata = "";
@@ -15,7 +21,26 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
         {
             mCloudRecoBehaviour.RegisterEventHandler(this);
         }
+        // from howto ar video
+        cloud = mCloudRecoBehaviour;
+        mainPlayer = GameObject.Find("Player");
+        Hide (mainPlayer);
+
     }
+
+    // from howto ar video
+    void Hide(GameObject ob)
+    {
+        Renderer[] rends = ob.GetComponentsInChildren<Renderer>();
+        Collider[] cols = ob.GetComponentsInChildren<Collider>();
+        foreach (var item in rends)
+        {
+            item.enabled = false;
+        }
+        foreach (var item in cols)
+            item.enabled = false;
+    }
+
 
     public void OnInitialized(TargetFinder targetFinder)
     {
@@ -47,18 +72,40 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
         // Changing CloudRecoBehaviour.CloudRecoEnabled to true will call:
         // 1. TargetFinder.StartRecognition()
         // 2. All registered ICloudRecoEventHandler.OnStateChanged() with true.
+
     }
 
 
-    // Here we handle a cloud target recognition event
+    //// Here we handle a cloud target recognition event
+    //public void OnNewSearchResult(TargetFinder.TargetSearchResult targetSearchResult)
+    //{
+    //    TargetFinder.CloudRecoSearchResult cloudRecoSearchResult =
+    //        (TargetFinder.CloudRecoSearchResult)targetSearchResult;
+    //    // do something with the target metadata
+    //    mTargetMetadata = cloudRecoSearchResult.MetaData;
+    //    // stop the target finder (i.e. stop scanning the cloud)
+    //    mCloudRecoBehaviour.CloudRecoEnabled = false;
+    //}
+
+    // from howto ar video
     public void OnNewSearchResult(TargetFinder.TargetSearchResult targetSearchResult)
     {
-        TargetFinder.CloudRecoSearchResult cloudRecoSearchResult =
+        GameObject newImageTarget = Instantiate(behaviour.gameObject) as GameObject;
+        mainPlayer = newImageTarget.transform.GetChild(0).gameObject;
+        GameObject augmentation = null;
+        if (augmentation != null)
+        {
+            augmentation.transform.SetParent(newImageTarget.transform);
+        }
+        if (behaviour)
+        {
+            TargetFinder.CloudRecoSearchResult cloudRecoSearchResult =
             (TargetFinder.CloudRecoSearchResult)targetSearchResult;
-        // do something with the target metadata
-        mTargetMetadata = cloudRecoSearchResult.MetaData;
-        // stop the target finder (i.e. stop scanning the cloud)
-        mCloudRecoBehaviour.CloudRecoEnabled = false;
+            // do something with the target metadata
+            mTargetMetadata = cloudRecoSearchResult.MetaData;
+        }
+        mainPlayer.GetComponent<VideoPlayer>().url = mTargetMetadata.Trim();
+        cloud.CloudRecoEnabled = true;
     }
 
 
@@ -79,6 +126,4 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
             }
         }
     }
-
-
 }

@@ -6,8 +6,12 @@ Copyright (c) 2012-2015 Qualcomm Connected Experiences, Inc. All Rights Reserved
 Vuforia is a trademark of PTC Inc., registered in the United States and other 
 countries.
 ==============================================================================*/
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Vuforia;
+using UnityEngine.Video;
+using UnityEngine.UI;
 
 /// <summary>
 /// This MonoBehaviour implements the Cloud Reco Event handling for this sample.
@@ -16,6 +20,13 @@ using Vuforia;
 /// </summary>
 public class CloudRecoEventHandler : MonoBehaviour, IObjectRecoEventHandler
 {
+    // from howto ar video
+    public GameObject mainPlayer;
+    private string mTargetMetadata = "";
+    public Text ErrorTxt;
+    string errorTitle, errorMsg;
+
+
     #region PRIVATE_MEMBERS
     CloudRecoBehaviour m_CloudRecoBehaviour;
     ObjectTracker m_ObjectTracker;
@@ -40,19 +51,16 @@ public class CloudRecoEventHandler : MonoBehaviour, IObjectRecoEventHandler
     /// <summary>
     /// Register for events at the CloudRecoBehaviour
     /// </summary>
-    void Start()
+	void Start()
     {
-        // Register this event handler at the CloudRecoBehaviour
-        m_CloudRecoBehaviour = GetComponent<CloudRecoBehaviour>();
-        if (m_CloudRecoBehaviour)
+        CloudRecoBehaviour cloudReco = GetComponent<CloudRecoBehaviour>();
+        if (cloudReco)
         {
-            m_CloudRecoBehaviour.RegisterEventHandler(this);
+            cloudReco.RegisterEventHandler(this);
         }
-
-        if (m_CloudActivityIcon)
-        {
-            m_CloudActivityIcon.enabled = false;
-        }
+        m_CloudRecoBehaviour = cloudReco;
+        mainPlayer = GameObject.Find("Player");
+        Hide(mainPlayer);
     }
 
     void Update()
@@ -91,7 +99,22 @@ public class CloudRecoEventHandler : MonoBehaviour, IObjectRecoEventHandler
     }
 
     // Error callback methods implemented in CloudErrorHandler
-    public void OnInitError(TargetFinder.InitState initError) { }
+    public void OnInitError(TargetFinder.InitState initError)
+    {
+        switch (initError)
+        {
+            case TargetFinder.InitState.INIT_ERROR_NO_NETWORK_CONNECTION:
+                errorTitle = "Network Unavailble";
+                errorMsg = "Check internet connection and try again";
+                break;
+            case TargetFinder.InitState.INIT_ERROR_SERVICE_NOT_AVAILABLE:
+                errorTitle = "Service not availble";
+                errorMsg = "Failed to initialize beacause service is unavailble";
+                break;
+        }
+        errorMsg = "<color=red>" + initError.ToString().Replace("_", " ") + "</color>\n\n" + errorMsg;
+        ErrorTxt.text = "Cloud Reco - Update Error: " + initError + "\n\n" + errorMsg;
+    }
     public void OnUpdateError(TargetFinder.UpdateState updateError) { }
 
 
@@ -118,43 +141,21 @@ public class CloudRecoEventHandler : MonoBehaviour, IObjectRecoEventHandler
     /// <param name="targetSearchResult"></param>
     public void OnNewSearchResult(TargetFinder.TargetSearchResult targetSearchResult)
     {
-        Debug.Log("<color=blue>OnNewSearchResult(): </color>" + targetSearchResult.TargetName);
-
-        TargetFinder.CloudRecoSearchResult cloudRecoResult = (TargetFinder.CloudRecoSearchResult)targetSearchResult;
-
-        // This code demonstrates how to reuse an ImageTargetBehaviour for new search results
-        // and modifying it according to the metadata. Depending on your application, it can
-        // make more sense to duplicate the ImageTargetBehaviour using Instantiate() or to
-        // create a new ImageTargetBehaviour for each new result. Vuforia will return a new
-        // object with the right script automatically if you use:
-        // TargetFinder.EnableTracking(TargetSearchResult result, string gameObjectName)
-
-        // Check if the metadata isn't null
-        if (cloudRecoResult.MetaData == null)
+        GameObject newImageTarget = Instantiate(m_ImageTargetBehaviour.gameObject) as GameObject;
+        mainPlayer = newImageTarget.transform.GetChild(0).gameObject;
+        GameObject augmentation = null;
+        if (augmentation != null)
         {
-            Debug.Log("Target metadata not available.");
+            augmentation.transform.SetParent(newImageTarget.transform);
         }
-        else
+        if (m_ImageTargetBehaviour)
         {
-            Debug.Log("MetaData: " + cloudRecoResult.MetaData);
-            Debug.Log("TargetName: " + cloudRecoResult.TargetName);
-            Debug.Log("Pointer: " + cloudRecoResult.TargetSearchResultPtr);
-            Debug.Log("TrackingRating: " + cloudRecoResult.TrackingRating);
-            Debug.Log("UniqueTargetId: " + cloudRecoResult.UniqueTargetId);
+            TargetFinder.CloudRecoSearchResult cloudRecoResult = (TargetFinder.CloudRecoSearchResult)targetSearchResult;
+            mTargetMetadata = cloudRecoResult.MetaData;
         }
-
-        // Changing CloudRecoBehaviour.CloudRecoEnabled to false will call TargetFinder.Stop()
-        // and also call all registered ICloudRecoEventHandler.OnStateChanged() with false.
-        m_CloudRecoBehaviour.CloudRecoEnabled = false;
-
-        // Clear any existing trackables
-        m_TargetFinder.ClearTrackables(false);
-
-        // Enable the new result with the same ImageTargetBehaviour:
-        m_TargetFinder.EnableTracking(cloudRecoResult, m_ImageTargetBehaviour.gameObject);
-
-        // Pass the TargetSearchResult to the Trackable Event Handler for processing
-        m_ImageTargetBehaviour.gameObject.SendMessage("TargetCreated", cloudRecoResult, SendMessageOptions.DontRequireReceiver);
+        string URL = mTargetMetadata;
+        mainPlayer.GetComponent<VideoPlayer>().url = URL.Trim();
+        m_CloudRecoBehaviour.CloudRecoEnabled = true;
     }
     #endregion // INTERFACE_IMPLEMENTATION_ICloudRecoEventHandler
 
@@ -167,4 +168,17 @@ public class CloudRecoEventHandler : MonoBehaviour, IObjectRecoEventHandler
         m_CloudActivityIcon.enabled = visible;
     }
     #endregion // PRIVATE_METHODS
+
+    // from howto ar video
+    void Hide(GameObject ob)
+    {
+        Renderer[] rends = ob.GetComponentsInChildren<Renderer>();
+        Collider[] cols = ob.GetComponentsInChildren<Collider>();
+        foreach (var item in rends)
+        {
+            item.enabled = false;
+        }
+        foreach (var item in cols)
+            item.enabled = false;
+    }
 }
