@@ -60,7 +60,7 @@ public class CloudRecoEventHandler : MonoBehaviour, IObjectRecoEventHandler
         }
         m_CloudRecoBehaviour = cloudReco;
         mainPlayer = GameObject.Find("Player");
-        Hide(mainPlayer);
+        // Hide(mainPlayer);
     }
 
     void Update()

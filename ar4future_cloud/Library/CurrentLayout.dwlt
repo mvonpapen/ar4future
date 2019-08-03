@@ -47,7 +47,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 494}
   m_MaxSize: {x: 14004, y: 14044}
   vertical: 0
-  controlID: 12
+  controlID: 13
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -219,7 +219,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 494}
   m_MaxSize: {x: 10002, y: 14044}
   vertical: 1
-  controlID: 13
+  controlID: 37
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 222}
   m_MaxSize: {x: 8006, y: 4022}
   vertical: 0
-  controlID: 14
+  controlID: 38
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -368,19 +368,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources
+    - Assets/Vuforia/Scripts
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources
+  - Assets/Vuforia/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\PapenMi\OneDrive - Comma Soft AG\git_repos\ar4future\ar4future_cloud
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 6a2b0000
-    m_LastClickedID: 11114
+    m_SelectedIDs: cc2b0000
+    m_LastClickedID: 11212
     m_ExpandedIDs: 00000000dc2a0000322b0000cc2b00004e2d000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -531,7 +531,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 26e9ffff6aebffff8efbffffa02d0000a82d0000
+      m_ExpandedIDs: 16caffff4ccaffff38ccffff34e5ffffcae9ffffbeedffffe0edffff02eefffff4f1ffff16f2ffff98f4ffffd0f6ffff8efbffff9e2d0000a62d0000b22d00004e3a0000583a0000643a0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -591,9 +591,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.05761996, y: 0.68691593, z: -0.14937522}
+    m_Target: {x: -0.14244977, y: 0.18087412, z: -0.22023155}
     speed: 2
-    m_Value: {x: -0.05761996, y: 0.68691593, z: -0.14937522}
+    m_Value: {x: -0.14244977, y: 0.18087412, z: -0.22023155}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -622,9 +622,9 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.25972584, y: 0.64433944, z: -0.6752392, w: -0.24784236}
+    m_Target: {x: 0.30756307, y: 0.27575323, z: -0.09362896, w: 0.905876}
     speed: 2
-    m_Value: {x: -0.25972524, y: 0.644338, z: -0.67523766, w: -0.24784179}
+    m_Value: {x: 0.30756116, y: 0.27575153, z: -0.09362838, w: 0.9058704}
   m_Size:
     m_Target: 0.007395029
     speed: 2
