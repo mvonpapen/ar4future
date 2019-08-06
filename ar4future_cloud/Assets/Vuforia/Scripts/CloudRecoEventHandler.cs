@@ -70,7 +70,7 @@ public class CloudRecoEventHandler : MonoBehaviour, IObjectRecoEventHandler
     #endregion // MONOBEHAVIOUR_METHODS
 
 
-    #region INTERFACE_IMPLEMENTATION_ICloudRecoEventHandler
+    #region INTERFACE_IMPLEMENTATION_IObjectRecoEventHandler
     /// <summary>
     /// called when TargetFinder has been initialized successfully
     /// </summary>
@@ -156,7 +156,7 @@ public class CloudRecoEventHandler : MonoBehaviour, IObjectRecoEventHandler
         // Pass the TargetSearchResult to the Trackable Event Handler for processing
         m_ImageTargetBehaviour.gameObject.SendMessage("TargetCreated", cloudRecoResult, SendMessageOptions.DontRequireReceiver);
     }
-    #endregion // INTERFACE_IMPLEMENTATION_ICloudRecoEventHandler
+    #endregion // INTERFACE_IMPLEMENTATION_IObjectRecoEventHandler
 
 
     #region PRIVATE_METHODS
