@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/urbanAR.unity
+    guid: c63c05b4974043340bbf79f6b0f5dd1e
   m_configObjects: {}
