@@ -8,6 +8,8 @@ countries.
 ==============================================================================*/
 using UnityEngine;
 using Vuforia;
+using System.Collections;
+using UnityEngine.Networking;
 
 /// <summary>
 /// This MonoBehaviour implements the Cloud Reco Event handling for this sample.
@@ -33,6 +35,8 @@ public class CloudRecoEventHandler : MonoBehaviour, IObjectRecoEventHandler
     public ImageTargetBehaviour m_ImageTargetBehaviour;
     public UnityEngine.UI.Image m_CloudActivityIcon;
     public UnityEngine.UI.Image m_CloudIdleIcon;
+
+    public GameObject quadImage;
     #endregion // PUBLIC_MEMBERS
 
 
@@ -141,6 +145,8 @@ public class CloudRecoEventHandler : MonoBehaviour, IObjectRecoEventHandler
             Debug.Log("Pointer: " + cloudRecoResult.TargetSearchResultPtr);
             Debug.Log("TrackingRating: " + cloudRecoResult.TrackingRating);
             Debug.Log("UniqueTargetId: " + cloudRecoResult.UniqueTargetId);
+            // Download image from metadata url
+            StartCoroutine(GetTexture(cloudRecoResult.MetaData));
         }
 
         // Changing CloudRecoBehaviour.CloudRecoEnabled to false will call TargetFinder.Stop()
@@ -167,4 +173,23 @@ public class CloudRecoEventHandler : MonoBehaviour, IObjectRecoEventHandler
         m_CloudActivityIcon.enabled = visible;
     }
     #endregion // PRIVATE_METHODS
+
+    // Download texture from metadata
+    IEnumerator GetTexture(string MediaUrl)
+    {
+        UnityWebRequest www = UnityWebRequestTexture.GetTexture(MediaUrl);
+        yield return www.SendWebRequest();
+
+        if (www.isNetworkError || www.isHttpError)
+        {
+            Debug.Log(www.error);
+        }
+        else
+        {
+            Texture myTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+            quadImage = GameObject.Find("ImageAR");
+            quadImage.GetComponent<Renderer>().material.mainTexture = myTexture;
+            Debug.Log("Progress: " + www.downloadProgress);
+        }
+    }
 }
