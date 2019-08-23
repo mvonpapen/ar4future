@@ -151,7 +151,7 @@ public class CloudRecoEventHandler : MonoBehaviour, IObjectRecoEventHandler
 
         // Changing CloudRecoBehaviour.CloudRecoEnabled to false will call TargetFinder.Stop()
         // and also call all registered ICloudRecoEventHandler.OnStateChanged() with false.
-        m_CloudRecoBehaviour.CloudRecoEnabled = false;
+        m_CloudRecoBehaviour.CloudRecoEnabled = true;
 
         // Clear any existing trackables
         m_TargetFinder.ClearTrackables(false);
