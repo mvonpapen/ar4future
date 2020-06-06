@@ -2,6 +2,8 @@ ScriptsOnlyBuild:
   usedScripts:
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.TestListCacheData
+    Vuforia.UnityExtensions.Editor.dll:
+    - Vuforia.EditorClasses.VuforiaConfigurationEditor
     Vuforia.UnityExtensions.dll:
     - Vuforia.ImageTargetBehaviour
     - Vuforia.TurnOffBehaviour
@@ -41,24 +43,22 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9766}
+      Script: {instanceID: 9770}
     - Class: 114
-      Script: {instanceID: 9886}
+      Script: {instanceID: 9890}
     - Class: 114
-      Script: {instanceID: 9908}
+      Script: {instanceID: 9912}
     - Class: 114
-      Script: {instanceID: 9916}
+      Script: {instanceID: 9920}
     - Class: 114
-      Script: {instanceID: 9918}
+      Script: {instanceID: 9922}
     - Class: 114
-      Script: {instanceID: 10310}
+      Script: {instanceID: 10314}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
     - Class: 258
-      Script: {instanceID: 0}
-    - Class: 328
       Script: {instanceID: 0}
     - Class: 329
       Script: {instanceID: 0}
@@ -1518,4 +1518,4 @@ ScriptsOnlyBuild:
   platform: 13
   scenePathNames:
   - Assets/ar4future.unity
-  playerPath: C:/Users/PapenMi/OneDrive - Comma Soft AG/git_repos/ar4future/ar4future/ar4future.apk
+  playerPath: C:/git_repos/ar4future/ar4future/veganAR.apk
