@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/ar4future.unity
     guid: b49c690b26e5be74195ef4728f4127c6
+  - enabled: 1
+    path: Assets/climate_impact_AR.unity
+    guid: 0e8b68f3138b0254ea6986c4a6a5eb37
   m_configObjects: {}

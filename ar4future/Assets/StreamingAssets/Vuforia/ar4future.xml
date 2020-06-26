@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
   <Tracking>
+    <ImageTarget name="produkt_erdn_butter" size="0.050000 0.074663" />
+    <ImageTarget name="produkt_mandelmus" size="0.050000 0.078627" />
+    <ImageTarget name="produkt_nuss-nougat" size="0.050000 0.086599" />
+    <ImageTarget name="produkt_zwieback" size="0.200000 0.213793" />
     <ImageTarget name="kaffee" size="0.050000 0.094712" />
     <ImageTarget name="hafer" size="0.100000 0.108028" />
     <ImageTarget name="kakao" size="0.100000 0.133333" />
+    <ImageTarget name="v_card" size="0.050000 0.078159" />
   </Tracking>
 </QCARConfig>

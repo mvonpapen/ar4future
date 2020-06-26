@@ -2,8 +2,6 @@ ScriptsOnlyBuild:
   usedScripts:
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.TestListCacheData
-    Vuforia.UnityExtensions.Editor.dll:
-    - Vuforia.EditorClasses.VuforiaConfigurationEditor
     Vuforia.UnityExtensions.dll:
     - Vuforia.ImageTargetBehaviour
     - Vuforia.TurnOffBehaviour
@@ -13,7 +11,7 @@ ScriptsOnlyBuild:
     - DefaultInitializationErrorHandler
     - DefaultTrackableEventHandler
   sceneClasses:
-    Assets/ar4future.unity:
+    Assets/climate_impact_AR.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -43,18 +41,20 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9770}
+      Script: {instanceID: 9768}
     - Class: 114
-      Script: {instanceID: 9890}
+      Script: {instanceID: 9888}
     - Class: 114
-      Script: {instanceID: 9912}
+      Script: {instanceID: 9910}
+    - Class: 114
+      Script: {instanceID: 9918}
     - Class: 114
       Script: {instanceID: 9920}
     - Class: 114
-      Script: {instanceID: 9922}
-    - Class: 114
-      Script: {instanceID: 10314}
+      Script: {instanceID: 10312}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 135
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -1517,5 +1517,5 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   platform: 13
   scenePathNames:
-  - Assets/ar4future.unity
-  playerPath: C:/git_repos/ar4future/ar4future/veganAR.apk
+  - Assets/climate_impact_AR.unity
+  playerPath: C:/git_repos/ar4future/ar4future/AR4Future_v04.apk
